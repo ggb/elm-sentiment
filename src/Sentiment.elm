@@ -6,6 +6,20 @@ module Sentiment exposing
   , analyseWith
   )
 
+{-| Elm module for 
+
+@docs Result
+
+# Helper
+
+@docs trim, tokenize
+
+# Analysis
+
+@docs analyse, analyseWith
+
+-}
+
 
 import String
 import Dict exposing (Dict)
@@ -13,6 +27,17 @@ import Dictionary.Afinn as Afinn
 import Regex exposing (HowMany(All), regex)
 
 
+{-| Result
+
+    type alias Result = 
+      { tokens: List String
+      , score: Int
+      , words: List String
+      , positive: List Int
+      , negative: List Int
+      , comparative: Float
+      }
+-}
 type alias Result = 
   { tokens: List String
   , score: Int
@@ -34,6 +59,14 @@ emptyResult =
   }
 
 
+{-| Trim
+
+    import Sentiment
+
+    Sentiment.trim "  --- Hello!, "
+
+    -- Hello
+-}
 trim : String -> String
 trim word =
   word
@@ -41,9 +74,20 @@ trim word =
   |> Regex.replace All (regex "\\W+$") (\_ -> "")
 
 
+{-| Tokenize
+
+    import Sentiment
+
+    Sentiment.tokenize " --- Hello, World! :) "
+
+    -- ["hello","world"]
+-}
 tokenize : String -> List String
 tokenize =
-  (String.toLower >> String.words >> List.map trim) 
+  String.toLower 
+    >> String.words 
+    >> List.map trim 
+    >> List.filter ((/=) "") 
 
 
 afinn : Dict String Int
@@ -70,6 +114,14 @@ singleToken sentimentDict token intermediateResult =
     intermediateResult
 
 
+{-| Analyse
+
+    import Sentiment
+
+    result = Sentiment.analyse "Best movie ever!"
+
+    -- result.score == 3
+-}
 analyseWith : (String -> List String) -> Dict String Int -> String -> Result
 analyseWith tokenizer inject str =
   let
@@ -94,6 +146,14 @@ analyseWith tokenizer inject str =
     |> addComparative
 
 
+{-| Analyse
+
+    import Sentiment
+
+    result = Sentiment.analyse "Best movie ever!"
+
+    -- result.score == 3
+-}
 analyse : String -> Result
 analyse =
   analyseWith 

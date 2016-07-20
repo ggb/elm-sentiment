@@ -1,6 +1,7 @@
 # elm-sentiment
 
 elm-sentiment is an Elm module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text.
+
 It is a port of the [Sentiment](https://github.com/thisandagain/sentiment)-module for Node.js.
 
 ## Installation
@@ -27,7 +28,7 @@ Sentiment.analyse shortText
 
 -- Result:
 --
--- { tokens = ["starwars","fans","are","the","best","kind","of","people","i'm","so","so","lucky","","honored","to","get","to","hang","out","with","you","at","celebration","thank","you","for","being","you"]
+-- { tokens = ["starwars","fans","are","the","best", ... ,"for","being","you"]
 -- , score = 12
 -- , words = ["best","kind","lucky","honored","thank"]
 -- , positive = [3,2,3,2,2]
