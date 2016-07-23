@@ -2,7 +2,9 @@
 
 elm-sentiment is an Elm module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text.
 
-It is a port of the [Sentiment](https://github.com/thisandagain/sentiment)-module for Node.js.
+It is inspired by the the [Sentiment](https://github.com/thisandagain/sentiment)-module for Node.js.
+
+**Please note** that a wordlist-based approach for sentiment analysis might not be the best available approach for every (your) application. It is a simple and easy to use solution that does not need training like a Bayes classifier, that might perform better in classifying sentiments.  
 
 ## Installation
 
@@ -40,3 +42,12 @@ Sentiment.analyse shortText
 
 For more advanced usage please take a look at the function-level documentation
 and especially at the analyseWith-function.
+
+## Future
+
+There are lots of possibilities to improve the current module. Some ideas:
+
+* handling of negations
+* more and different word lists
+* compression of word lists
+* possibility to train a model (word list as fallback or support)

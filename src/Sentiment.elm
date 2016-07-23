@@ -23,7 +23,7 @@ module Sentiment exposing
 
 import String
 import Dict exposing (Dict)
-import Dictionary.Afinn as Afinn
+import WordList.Afinn as Afinn
 import Regex exposing (HowMany(All), regex)
 
 
@@ -59,7 +59,7 @@ emptyResult =
   }
 
 
-{-| Trim
+{-| Trim a given input string.
 
     import Sentiment
 
@@ -74,7 +74,7 @@ trim word =
   |> Regex.replace All (regex "\\W+$") (\_ -> "")
 
 
-{-| Tokenize
+{-| Split a string into words, turn everything into lowercase and remove everything that is not necessary (e. g. whitespace or special characters).
 
     import Sentiment
 
@@ -88,11 +88,6 @@ tokenize =
     >> String.words 
     >> List.map trim 
     >> List.filter ((/=) "") 
-
-
-afinn : Dict String Int
-afinn = 
-  Dict.fromList Afinn.list
 
 
 singleToken : Dict String Int -> String -> Result -> Result
@@ -114,24 +109,32 @@ singleToken sentimentDict token intermediateResult =
     intermediateResult
 
 
-{-| Analyse
+{-| Analyse a given string and return a struct of type Result. This function expects a dictionary containing a word list, a dictionary with additional sentiment information and a tokenizer function.
 
     import Sentiment
+    import WordList.Afinn as Afinn
+    import String
+    import Dict
 
-    result = Sentiment.analyse "Best movie ever!"
+    result = 
+      Sentiment.analyseWith 
+        Afinn.get
+        (Dict.fromList [(":-)",3),(":-|", 0),(":-(", -3)])
+        (String.toLower >> String.words)
+        "Best movie ever! :-)"
 
-    -- result.score == 3
+    -- result.score == 6
 -}
-analyseWith : (String -> List String) -> Dict String Int -> String -> Result
-analyseWith tokenizer inject str =
+analyseWith : Dict String Int -> Dict String Int -> (String -> List String) -> String -> Result
+analyseWith wordList inject tokenizer str =
   let
     token = 
       tokenizer str
     sentimentDict = 
       if Dict.isEmpty inject then
-        afinn
+        wordList
       else
-        Dict.union inject afinn
+        Dict.union inject wordList
     addToken result =
       { result | tokens = token }
     addComparative result =
@@ -146,7 +149,7 @@ analyseWith tokenizer inject str =
     |> addComparative
 
 
-{-| Analyse
+{-| Analyse a string and return a struct of type Result. The function basically calls analyseWith, but with (good) defaults.
 
     import Sentiment
 
@@ -156,6 +159,7 @@ analyseWith tokenizer inject str =
 -}
 analyse : String -> Result
 analyse =
-  analyseWith 
-    tokenize
+  analyseWith
+    Afinn.get
     Dict.empty
+    tokenize

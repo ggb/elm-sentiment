@@ -2,6 +2,7 @@
 node_modules/
 elm-stuff/
 docs/
+benchmark/
 *.js
 *.html
 .vscode/
