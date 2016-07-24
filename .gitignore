@@ -6,3 +6,4 @@ benchmark/
 *.js
 *.html
 .vscode/
+String

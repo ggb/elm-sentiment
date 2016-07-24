@@ -6,7 +6,11 @@ module Sentiment exposing
   , analyseWith
   )
 
-{-| Elm module for 
+{-| elm-sentiment is an Elm module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text. Other wordlists are easy to integrate.
+
+It is inspired by the the [Sentiment](https://github.com/thisandagain/sentiment)-module for Node.js.
+
+**Please note** that a wordlist-based approach for sentiment analysis might not be the best available approach for every (your) application. It is a simple and easy to use solution that does not need training like a Bayes classifier, that might perform better in classifying sentiments.  
 
 @docs Result
 

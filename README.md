@@ -1,6 +1,6 @@
 # elm-sentiment
 
-elm-sentiment is an Elm module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text.
+elm-sentiment is an Elm module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text. Other wordlists are easy to integrate.
 
 It is inspired by the the [Sentiment](https://github.com/thisandagain/sentiment)-module for Node.js.
 
@@ -19,14 +19,14 @@ Usage is straightforward:
 ```elm
 import Sentiment
 
-shortText = """
+tweet = """
 #StarWars fans are the best kind of people. 
 I'm so, so lucky & honored to get to hang 
 out with you at Celebration. Thank you for 
 being you.
 """
 
-Sentiment.analyse shortText
+Sentiment.analyse tweet
 
 -- Result:
 --

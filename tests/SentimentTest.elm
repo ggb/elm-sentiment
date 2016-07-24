@@ -1,5 +1,6 @@
 module SentimentTest exposing (..)
 
+import WordList.Afinn as Afinn
 import Sentiment exposing (tokenize, analyse, analyseWith)
 import ElmTest exposing (..)
 import Dict
@@ -11,7 +12,7 @@ ex1 = analyse "Hey you worthless scumbag"
 ex2 = analyse "This is so cool"
 ex3 = analyse "self-deluded"
 ex4 = analyse "constructor"
-ex5 = analyseWith tokenize (Dict.fromList [("cool", 100)]) "This is so cool"
+ex5 = analyseWith Afinn.get (Dict.fromList [("cool", 100)]) tokenize "This is so cool"
 ex6 = analyse corpusText
 
 
