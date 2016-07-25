@@ -31,16 +31,7 @@ import WordList.Afinn as Afinn
 import Regex exposing (HowMany(All), regex)
 
 
-{-| Result
-
-    type alias Result = 
-      { tokens: List String
-      , score: Int
-      , words: List String
-      , positive: List Int
-      , negative: List Int
-      , comparative: Float
-      }
+{-| The Result-type describes the information returned by a call to analyse or analyseWith. The struct contains all tokens, the sum of positive and negative scores etc. The value comparative is the overall score divided by the number of words in the input string. 
 -}
 type alias Result = 
   { tokens: List String
@@ -78,7 +69,7 @@ trim word =
   |> Regex.replace All (regex "\\W+$") (\_ -> "")
 
 
-{-| Split a string into words, turn everything into lowercase and remove everything that is not necessary (e. g. whitespace or special characters).
+{-| Split a string into words, turn all words into lowercase and remove everything that is not necessary (e. g. whitespace or special characters).
 
     import Sentiment
 

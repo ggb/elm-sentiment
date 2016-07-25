@@ -1,6 +1,6 @@
 module WordList.Afinn exposing (get)
 
-{-| This modules contains a single function with the whole [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist.
+{-| This module contains a single function with the whole [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist.
 
 @docs get
 -}

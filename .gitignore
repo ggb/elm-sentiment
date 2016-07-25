@@ -7,3 +7,4 @@ benchmark/
 *.html
 .vscode/
 String
+documentation.json
