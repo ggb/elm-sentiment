@@ -135,9 +135,9 @@ analyseWith wordList inject tokenizer str =
     addComparative result =
       let
         len = List.length result.tokens |> toFloat
-        score' = toFloat result.score
+        score1 = toFloat result.score
       in
-        { result | comparative = score' / len }
+        { result | comparative = score1 / len }
   in
     List.foldr (singleToken sentimentDict) emptyResult token
     |> addToken
