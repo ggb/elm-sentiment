@@ -8,3 +8,4 @@ benchmark/
 .vscode/
 String
 documentation.json
+package-lock.json

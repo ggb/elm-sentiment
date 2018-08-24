@@ -1,7 +1,7 @@
 module Tests exposing (..)
 
 import Test exposing (..)
-import Expect
+import Expect exposing (FloatingPointTolerance(..))
 import Fixtures exposing (..)
 import Sentiment exposing (..)
 import Dict
@@ -9,9 +9,9 @@ import WordList.Afinn as Afinn
 
 
 testHelper i (result, expected) = 
-    test ("Test " ++ toString i) <|
+    test ("Test " ++ String.fromInt i) <|
         \() ->
-            Expect.equal result expected |> Debug.log ""
+            Expect.within (Absolute 0.000001) result expected |> Debug.log ""
 
 
 ex1 = analyse "Hey you worthless scumbag"

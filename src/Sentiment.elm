@@ -28,7 +28,7 @@ It is inspired by the the [Sentiment](https://github.com/thisandagain/sentiment)
 import String
 import Dict exposing (Dict)
 import WordList.Afinn as Afinn
-import Regex exposing (HowMany(All), regex)
+import Regex exposing (Regex)
 
 
 {-| The Result-type describes the information returned by a call to analyse or analyseWith. The struct contains all tokens, the sum of positive and negative scores etc. The value comparative is the overall score divided by the number of words in the input string. 
@@ -54,6 +54,12 @@ emptyResult =
   }
 
 
+regex : String -> Regex
+regex str =
+  Maybe.withDefault Regex.never <|
+    Regex.fromString str 
+
+
 {-| Trim a given input string.
 
     import Sentiment
@@ -65,8 +71,8 @@ emptyResult =
 trim : String -> String
 trim word =
   word
-  |> Regex.replace All (regex "^\\W+") (\_ -> "")
-  |> Regex.replace All (regex "\\W+$") (\_ -> "")
+  |> Regex.replace (regex "^\\W+") (\_ -> "")
+  |> Regex.replace (regex "\\W+$") (\_ -> "")
 
 
 {-| Split a string into words, turn all words into lowercase and remove everything that is not necessary (e. g. whitespace or special characters).
